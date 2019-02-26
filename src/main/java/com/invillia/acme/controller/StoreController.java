@@ -23,23 +23,22 @@ public class StoreController {
     @Autowired
     private StoreRepository repository;
 
-    @ApiOperation("")
+    @ApiOperation("Cria uma nova Loja")
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public ResponseEntity<Store> createStore(@RequestBody StoreDto dto) {
         return ResponseEntity.ok(repository.save(dto.getEntity()));
     }
 
-    @ApiOperation("")
+    @ApiOperation("Atualiza uma loja já existente")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
     public ResponseEntity<Store> updateStore(@RequestBody StoreDto dto) {
         return ResponseEntity.ok(repository.save(dto.getEntity()));
     }
 
-    @ApiOperation("")
+    @ApiOperation("Lista as lojas de acordo com os filtros")
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public ResponseEntity<List<Store>> getStoreByFilter(@RequestBody StoreFilter filter) {
         Specification<Store> storeSpecification = StoreSpecification.getFilter(filter);
         return ResponseEntity.ok(repository.findAll(storeSpecification));
     }
-
 }
