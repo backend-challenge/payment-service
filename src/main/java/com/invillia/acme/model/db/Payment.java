@@ -1,22 +1,20 @@
 package com.invillia.acme.model.db;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "tb_payment")
 public class Payment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
     private Integer status;
@@ -24,7 +22,8 @@ public class Payment {
     private String numberCreditCard;
     @Column
     private LocalDate paymentDate;
-    @OneToOne
-    private Order order;
+    @OneToOne()
+    @JoinColumn(name = "id", unique = true)
+    private Order orderE;
 
 }
