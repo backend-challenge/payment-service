@@ -3,10 +3,9 @@ package com.invillia.acme.model.dto;
 import lombok.Getter;
 
 @Getter
-public enum OrderStatus {
+public enum PaymentStatus {
 
-	PENDING_PAYMENT,
-	APPROVED,
 	REFUNDED,
-	REFUND_REQUEST
+	PENDING_REFUNDED,
+	APPROVED
 }

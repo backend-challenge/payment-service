@@ -14,16 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "tb_order")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column
-    private String address;
-    @Column
-    private LocalDate confirmationDate;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
-    @OneToMany(cascade = {CascadeType.PERSIST})
-    private List<Item> items;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	@Column
+	private String address;
+	@Column
+	private LocalDate confirmationDate;
+	@Column
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
+	@OneToMany(cascade = {CascadeType.PERSIST})
+	private List<Item> items;
 }
