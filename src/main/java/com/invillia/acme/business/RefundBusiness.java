@@ -40,14 +40,7 @@ public class RefundBusiness {
 		return entity;
 	}
 
-	private Payment getPaymentByOrder(Integer orderId) {
-		return Optional.ofNullable(repository.findByOrderE(Order.builder().id(orderId).build()))
-				.orElseThrow(
-						() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Ordem não encontrada")
-				);
-	}
-
-	@Transactional()
+	@Transactional
 	public void refundItem(Integer orderId, Integer itemId) {
 		Payment paymentEntity = this.getPaymentByOrder(orderId);
 		Order orderEntity = paymentEntity.getOrderE();
@@ -62,10 +55,17 @@ public class RefundBusiness {
 
 	}
 
+	private Payment getPaymentByOrder(Integer orderId) {
+		return Optional.ofNullable(repository.findByOrderE(Order.builder().id(orderId).build()))
+				.orElseThrow(
+						() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "Ordem não encontrada")
+				);
+	}
+
 	private void itemValidation(Integer itemId, List<Item> itemList) {
 		Boolean hasItem = itemList.stream()
-				.mapToInt(Item::getId)
-				.anyMatch(x -> itemId.equals(x));
+				.map(Item::getId)
+				.anyMatch(x -> x.equals(itemId));
 
 		if (!hasItem) {
 			throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Item não encontrado");
@@ -86,8 +86,8 @@ public class RefundBusiness {
 
 		Payment refundPayment = new Payment();
 		BeanUtils.copyProperties(payment, refundPayment, "id", "orderE");
-		refundPayment.setStatus(PaymentStatus.REFUNDED);
-		repository.save(payment);
+		refundPayment.setStatus(PaymentStatus.PENDING_REFUNDED);
+		repository.save(refundPayment);
 	}
 
 
