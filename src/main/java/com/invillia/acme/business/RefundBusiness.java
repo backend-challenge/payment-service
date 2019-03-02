@@ -87,6 +87,7 @@ public class RefundBusiness {
 		Payment refundPayment = new Payment();
 		BeanUtils.copyProperties(payment, refundPayment, "id", "orderE");
 		refundPayment.setStatus(PaymentStatus.PENDING_REFUNDED);
+		refundPayment.setOrderE(refundOrder);
 		repository.save(refundPayment);
 	}
 

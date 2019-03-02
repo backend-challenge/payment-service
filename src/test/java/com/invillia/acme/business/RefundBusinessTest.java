@@ -81,6 +81,8 @@ public class RefundBusinessTest {
 		Assert.assertNotNull(itemResult);
 		Assert.assertEquals(ORDER_STATUS, orderResult.getStatus());
 		Assert.assertEquals(PAYMENT_STATUS, paymentResult.getStatus());
+		Assert.assertNotNull(paymentResult.getOrderE());
+		Assert.assertNotNull(orderResult.getItems());
 	}
 
 	private Payment getPayment() {

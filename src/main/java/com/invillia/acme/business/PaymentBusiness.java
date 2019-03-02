@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +41,7 @@ public class PaymentBusiness {
 		Payment paymentEntity = new Payment();
 		BeanUtils.copyProperties(dto, paymentEntity, "id", "order");
 		paymentEntity.setOrderE(orderEntity);
+		paymentEntity.setPaymentDate(LocalDate.now());
 		try {
 			paymentEntity.setStatus(PaymentStatus.APPROVED);
 			repository.save(paymentEntity);

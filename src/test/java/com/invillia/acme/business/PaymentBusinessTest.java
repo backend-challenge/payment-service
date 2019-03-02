@@ -51,6 +51,7 @@ public class PaymentBusinessTest {
 		Assert.assertEquals(NUMBER_CREDIT_CARD, paymentResult.getNumberCreditCard());
 		Assert.assertEquals(PAYMENT_STATUS, paymentResult.getStatus());
 		Assert.assertEquals(ORDER_STATUS, orderResult.getStatus());
+		Assert.assertNotNull(paymentResult.getPaymentDate());
 	}
 
 	@Test(expected = HttpClientErrorException.class)
