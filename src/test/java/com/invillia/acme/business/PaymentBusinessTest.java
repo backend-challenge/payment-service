@@ -27,17 +27,13 @@ public class PaymentBusinessTest {
 	private static final String NUMBER_CREDIT_CARD = "1234-1234-1234-1234";
 	private static final OrderStatus ORDER_STATUS = OrderStatus.APPROVED;
 	private static final PaymentStatus PAYMENT_STATUS = PaymentStatus.APPROVED;
-
+	private static final Integer ID = 1;
 	@InjectMocks
 	private PaymentBusiness business;
-
 	@Mock
 	private PaymentRepository repository;
-
 	@Mock
 	private OrderRepository orderRepository;
-
-	private static final Integer ID = 1;
 
 	@Test
 	public void testMakePayment() {
