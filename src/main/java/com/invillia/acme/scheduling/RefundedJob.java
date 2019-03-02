@@ -23,7 +23,7 @@ public class RefundedJob {
 	@Autowired
 	private PaymentRepository repository;
 
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(cron = "0 10 10	 * * ?")
 	public void reportCurrentTime() {
 
 		List<Payment> paymentList = repository.findAll()
