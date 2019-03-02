@@ -14,8 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "tb_order")
 public class Order {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column
 	private String address;
@@ -24,6 +25,12 @@ public class Order {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
-	@OneToMany(cascade = {CascadeType.PERSIST})
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	@JoinColumn(name = "tb_order_id")
 	private List<Item> items;
 }
+
+
